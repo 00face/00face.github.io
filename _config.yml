@@ -1,0 +1,8 @@
+title: "00FACE"
+description: "Projects, experiments, and machine-spirit rites by 00FACE."
+url: "https://00face.github.io"
+baseurl: ""
+markdown: kramdown
+theme: null
+plugins: []
+permalink: pretty

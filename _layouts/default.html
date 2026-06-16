@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">00<span>FACE</span></a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/projects/lespri/">Lespri Bot</a>
+      <a href="/projects/lespri/privacy/">Privacy</a>
+      <a href="/projects/lespri/terms/">Terms</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <p>© {{ "now" | date: "%Y" }} 00FACE. Purple, cyan, shadow, orange, and sun.</p>
+  </footer>
+</body>
+</html>

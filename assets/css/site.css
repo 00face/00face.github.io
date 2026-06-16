@@ -1,0 +1,40 @@
+:root{
+  --bg:#050309;
+  --panel:#10081f;
+  --panel2:#170b2d;
+  --purple:#7a35ff;
+  --face:#00FACE;
+  --orange:#ff7a18;
+  --yellow:#ffd447;
+  --text:#f6f0ff;
+  --muted:#c9b8e8;
+  --line:rgba(0,250,206,.28);
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6}
+body{margin:0;background:
+radial-gradient(circle at 10% 10%,rgba(122,53,255,.25),transparent 28rem),
+radial-gradient(circle at 90% 0%,rgba(0,250,206,.16),transparent 22rem),
+radial-gradient(circle at 80% 90%,rgba(255,122,24,.18),transparent 24rem),
+var(--bg)}
+a{color:var(--face);text-decoration:none}
+a:hover{text-decoration:underline}
+.site-header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1rem clamp(1rem,4vw,3rem);background:rgba(5,3,9,.84);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-weight:900;letter-spacing:.08em;color:var(--yellow);font-size:1.1rem}
+.brand span{color:var(--face)}
+nav{display:flex;gap:.8rem;flex-wrap:wrap;font-size:.95rem}
+nav a{color:var(--text)}
+.page-shell{width:min(980px,100%);margin:0 auto;padding:clamp(1.25rem,5vw,4rem)}
+.hero,.card{background:linear-gradient(135deg,rgba(23,11,45,.96),rgba(16,8,31,.92));border:1px solid var(--line);box-shadow:0 0 40px rgba(0,250,206,.08),inset 0 0 40px rgba(122,53,255,.08);border-radius:24px;padding:clamp(1.25rem,4vw,2.2rem);margin:1rem 0}
+.hero h1{font-size:clamp(2.2rem,9vw,5.2rem);line-height:.92;margin:.2rem 0 1rem;letter-spacing:-.06em}
+.kicker{color:var(--face);text-transform:uppercase;letter-spacing:.18em;font-weight:800;font-size:.85rem}
+h1,h2,h3{line-height:1.15}
+h2{margin-top:2rem;color:var(--yellow)}
+strong{color:#fff}
+code{background:#000;border:1px solid rgba(255,255,255,.12);padding:.15rem .35rem;border-radius:.35rem;color:var(--face)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+.btn{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.7rem 1rem;background:rgba(0,250,206,.08);color:var(--text);font-weight:800}
+.btn.alt{background:rgba(255,122,24,.12);border-color:rgba(255,122,24,.35)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+ul{padding-left:1.2rem}
+.site-footer{padding:2rem;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
