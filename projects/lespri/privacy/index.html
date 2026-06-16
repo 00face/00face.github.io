@@ -3,54 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lespri Bot Privacy Policy | 00FACE</title>
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <style>html,body{overflow:auto}.policy-page{width:min(900px,100%);margin:0 auto;padding:clamp(1rem,5vw,4rem)}.policy-card{background:rgba(26,11,32,.96);border:1px solid var(--line);border-radius:1.25rem;padding:clamp(1rem,4vw,2rem)}</style>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Privacy Policy | 00FACE</title>
+  <link rel="stylesheet" href="/assets/css/cylinder-20260616183128.css?v=20260616183128">
 </head>
-<body>
-  <main class="policy-page">
-    <article class="policy-card">
+<body class="doc-body">
+  <aside class="side-rail left-rail" aria-label="Page navigation">
+    <a class="brand-word no-wrap" href="/">00<span>FACE</span></a>
+    <nav class="side-nav">
+      <a href="/">Main</a>
+      <a href="/projects/lespri/">Lespri</a>
+      <a href="/projects/lespri/privacy/">Privacy</a>
+      <a href="/projects/lespri/terms/">Terms</a>
+    </nav>
+  </aside>
+
+  <aside class="side-rail right-rail" aria-label="Doctrine rail">
+    <div class="rail-motto">
+      <span class="side-motto">Orange fire, cyan logic, purple shadow.</span>
+      <a class="side-author no-wrap" href="/">Tech Adept 00FACE</a>
+    </div>
+  </aside>
+
+  <div class="display-toggles" aria-label="Display toggles">
+    <button id="text-size-btn" type="button">A+</button>
+    <button id="contrast-btn" type="button">🌑</button>
+  </div>
+
+  <main class="doc-shell" data-cylinder>
+    <section class="doc-title">
       <p class="kicker">Lespri Bot</p>
-      <h1 style="font-size:clamp(2.4rem,7vw,4.6rem)">Privacy Policy</h1>
-      <p><strong>Effective date:</strong> 2026-06-16</p>
+      <h1>Privacy Policy</h1>
+      <p>Effective date: 2026-06-16</p>
+    </section>
 
-      <p>Lespri Bot is a Discord bot operated for the NO M.E.G.A.T.R.O.N community. Lespri provides role management, color roles, reaction roles, moderation support, welcome/onboarding tools, image generation commands, and experimental narrated-chat features.</p>
+    <section class="cyl-stage" data-stage>
+      <div class="cyl-track" data-track>
+        <article class="cyl-panel" id="overview"><h2>Overview</h2><p>Lespri Bot is a Discord bot operated for the NO M.E.G.A.T.R.O.N community. It provides role management, color roles, reaction roles, moderation support, welcome/onboarding tools, image generation commands, and experimental narrated-chat features.</p><div class="callout">Lespri’s privacy doctrine is minimization: process what is needed, avoid durable retention where possible, and never intentionally log secrets.</div></article>
+        <article class="cyl-panel" id="data"><h2>What Lespri Processes</h2><ul><li>Discord message content and command inputs.</li><li>Interaction data from buttons, slash commands, and reactions.</li><li>Discord user IDs, role IDs, channel IDs, and guild IDs.</li><li>Uploaded images and generated images during workflows.</li><li>Moderation actions and role-change events.</li></ul></article>
+        <article class="cyl-panel" id="generation"><h2>Image Generation</h2><ul><li>Prompts are sanitized before model/provider calls where practical.</li><li>Raw prompts are not stored in durable public logs.</li><li>Generated images are not kept in permanent local job folders.</li><li>Temporary files are deleted after successful delivery or failure.</li><li>Button actions use short-lived memory/cache where possible.</li></ul></article>
+        <article class="cyl-panel" id="roles"><h2>Roles & Moderation</h2><p>Lespri may read or update Discord roles when users request self-assignable roles, color roles, reaction roles, or moderator-assisted role changes.</p><p>Lespri may log privacy-safe audit events such as role IDs, action type, success/failure status, and timestamps.</p></article>
+        <article class="cyl-panel" id="logs"><h2>Logs</h2><p>Lespri may keep short operational logs for debugging, safety, abuse prevention, and reliability. Logs should not intentionally contain raw API tokens, full raw prompts, generated image bytes, or unnecessary personally identifying information.</p></article>
+        <article class="cyl-panel" id="third-party"><h2>Third-Party Services</h2><p>Lespri may use external services for image generation, language-model responses, hosting, DNS, or infrastructure. When possible, Lespri sends only the minimum information needed for the requested action.</p></article>
+        <article class="cyl-panel" id="control"><h2>User Control & Contact</h2><p>Users may remove self-assigned roles or color roles through available bot commands or reaction-role controls. Users may request that administrators purge Lespri’s short-lived cached records associated with them, when such records exist.</p><p>For questions, contact the server owner or Lespri Bot operator through the NO M.E.G.A.T.R.O.N Discord community.</p></article>
+      </div>
+    </section>
 
-      <h2>What Lespri Collects</h2>
-      <p>Lespri may process Discord message content, command inputs, interaction data, Discord user IDs, role IDs, channel IDs, guild IDs, uploaded images, generated images, and moderation actions only when needed to perform a requested bot function.</p>
-
-      <p>Lespri does not intentionally collect real names, addresses, phone numbers, emails, government IDs, payment information, or other sensitive personal information. If a user includes such information in a prompt or command, Lespri may attempt to redact or minimize it before processing.</p>
-
-      <h2>Image Generation and Prompts</h2>
-      <p>Lespri is designed to minimize retention of image-generation prompts and generated images. Generated local files are treated as temporary work artifacts.</p>
-      <ul>
-        <li>prompts are sanitized before model/provider calls where practical;</li>
-        <li>raw prompts are not stored in durable public logs;</li>
-        <li>generated images are not kept in permanent local job folders;</li>
-        <li>temporary files are deleted after successful delivery or failure;</li>
-        <li>button actions use short-lived memory/cache where possible;</li>
-        <li>downloads return the generated image to the requesting user when available.</li>
-      </ul>
-
-      <p>Discord itself may retain messages, attachments, and interaction data according to Discord’s own policies.</p>
-
-      <h2>Role and Moderation Data</h2>
-      <p>Lespri may read or update Discord roles when users request self-assignable roles, color roles, reaction roles, or moderator-assisted role changes. Lespri may log privacy-safe audit events such as role IDs, action type, success/failure status, and timestamps.</p>
-
-      <h2>Logs</h2>
-      <p>Lespri may keep short operational logs for debugging, safety, abuse prevention, and reliability. Logs should not intentionally contain raw API tokens, full raw prompts, generated image bytes, or unnecessary personally identifying information.</p>
-
-      <h2>Third-Party Services</h2>
-      <p>Lespri may use external services for image generation, language-model responses, hosting, DNS, or infrastructure. When possible, Lespri sends only the minimum information needed for the requested action.</p>
-
-      <h2>User Control</h2>
-      <p>Users may remove self-assigned roles or color roles through available bot commands or reaction-role controls. Users may request that administrators purge Lespri’s short-lived cached records associated with them, when such records exist.</p>
-
-      <h2>Contact</h2>
-      <p>For questions about this policy, contact the server owner or Lespri Bot operator through the NO M.E.G.A.T.R.O.N Discord community.</p>
-
-      <p><a class="button primary" href="/">Return Home</a></p>
-    </article>
+    <div class="controls" aria-label="Cylinder controls">
+      <button type="button" data-prev aria-label="Previous section">↑</button>
+      <div class="dots" data-dots aria-label="Section dots"></div>
+      <button type="button" data-next aria-label="Next section">↓</button>
+    </div>
   </main>
+
+  <script src="/assets/js/cylinder-20260616183128.js?v=20260616183128"></script>
 </body>
 </html>

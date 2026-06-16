@@ -1,0 +1,200 @@
+(function () {
+  const root = document.querySelector("[data-cylinder]");
+  if (!root) return;
+
+  const stage = root.querySelector("[data-cylinder-stage]");
+  const track = root.querySelector("[data-cylinder-track]");
+  const panels = Array.from(root.querySelectorAll(".cylinder-panel"));
+  const prevBtn = root.querySelector("[data-cylinder-prev]");
+  const nextBtn = root.querySelector("[data-cylinder-next]");
+  const dotsWrap = root.querySelector("[data-cylinder-dots]");
+  const textBtn = document.getElementById("text-size-btn");
+  const contrastBtn = document.getElementById("contrast-btn");
+
+  if (!stage || !track || panels.length === 0) return;
+
+  document.body.classList.add("cylinder-ready");
+
+  let current = 0;
+  let theta = 360 / panels.length;
+  let radius = 640;
+  let animating = false;
+  let touchStartX = null;
+  let touchStartY = null;
+
+  function clampIndex(idx) {
+    if (idx < 0) return panels.length - 1;
+    if (idx >= panels.length) return 0;
+    return idx;
+  }
+
+  function canVerticallyScroll(el, direction) {
+    if (!el) return false;
+    if (direction > 0) {
+      return el.scrollTop + el.clientHeight < el.scrollHeight - 2;
+    }
+    return el.scrollTop > 2;
+  }
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = "";
+    panels.forEach((panel, idx) => {
+      const dot = document.createElement("button");
+      dot.className = "cylinder-dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Open section ${idx + 1}`);
+      dot.addEventListener("click", () => goTo(idx));
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    if (!dotsWrap) return;
+    Array.from(dotsWrap.children).forEach((dot, idx) => {
+      dot.classList.toggle("is-active", idx === current);
+    });
+  }
+
+  function readHashIndex() {
+    const id = window.location.hash.replace("#", "");
+    if (!id) return 0;
+    const found = panels.findIndex((panel) => panel.id === id);
+    return found >= 0 ? found : 0;
+  }
+
+  function measure() {
+    theta = 360 / panels.length;
+    const panelWidth = Math.min(860, window.innerWidth * 0.86);
+    const rawRadius = panelWidth / (2 * Math.tan(Math.PI / panels.length));
+    radius = Math.max(window.innerWidth < 620 ? 330 : 460, Math.round(rawRadius + 120));
+    layout();
+  }
+
+  function layout() {
+    panels.forEach((panel, idx) => {
+      const angle = theta * idx;
+      panel.style.transform = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+      panel.classList.toggle("is-active", idx === current);
+      panel.setAttribute("aria-hidden", idx === current ? "false" : "true");
+      panel.tabIndex = idx === current ? 0 : -1;
+      if (idx !== current) panel.scrollTop = 0;
+    });
+
+    track.style.transform = `translateZ(${-radius}px) rotateY(${-theta * current}deg)`;
+    updateDots();
+
+    const active = panels[current];
+    if (active && active.id) {
+      history.replaceState(null, "", `#${active.id}`);
+    }
+  }
+
+  function goTo(idx) {
+    if (animating) return;
+    current = clampIndex(idx);
+    animating = true;
+    layout();
+    setTimeout(() => {
+      animating = false;
+    }, 740);
+  }
+
+  function next() {
+    goTo(current + 1);
+  }
+
+  function prev() {
+    goTo(current - 1);
+  }
+
+  stage.addEventListener(
+    "wheel",
+    (e) => {
+      const active = panels[current];
+      const delta = e.deltaY || e.detail || e.wheelDelta;
+
+      if (
+        (delta > 0 && canVerticallyScroll(active, 1)) ||
+        (delta < 0 && canVerticallyScroll(active, -1))
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+      if (delta > 0) next();
+      else prev();
+    },
+    { passive: false }
+  );
+
+  stage.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  });
+
+  stage.addEventListener("touchend", (e) => {
+    if (touchStartX === null || touchStartY === null) return;
+
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const dx = endX - touchStartX;
+    const dy = endY - touchStartY;
+    const active = panels[current];
+
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) next();
+      else prev();
+    } else if (Math.abs(dy) > 48) {
+      if (dy < 0 && !canVerticallyScroll(active, 1)) next();
+      if (dy > 0 && !canVerticallyScroll(active, -1)) prev();
+    }
+
+    touchStartX = null;
+    touchStartY = null;
+  });
+
+  window.addEventListener("keydown", (e) => {
+    const active = panels[current];
+
+    if (e.key === "ArrowRight") {
+      next();
+      e.preventDefault();
+    } else if (e.key === "ArrowLeft") {
+      prev();
+      e.preventDefault();
+    } else if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+      if (!canVerticallyScroll(active, 1)) {
+        next();
+        e.preventDefault();
+      }
+    } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+      if (!canVerticallyScroll(active, -1)) {
+        prev();
+        e.preventDefault();
+      }
+    }
+  });
+
+  if (prevBtn) prevBtn.addEventListener("click", prev);
+  if (nextBtn) nextBtn.addEventListener("click", next);
+
+  if (textBtn) {
+    textBtn.addEventListener("click", () => {
+      document.body.classList.toggle("large-text");
+    });
+  }
+
+  if (contrastBtn) {
+    contrastBtn.addEventListener("click", () => {
+      document.body.classList.toggle("high-contrast");
+    });
+  }
+
+  window.addEventListener("resize", measure);
+
+  buildDots();
+  current = readHashIndex();
+  measure();
+})();
